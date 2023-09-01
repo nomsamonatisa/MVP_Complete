@@ -35,7 +35,7 @@ def calculate_framingham_score(request):
                                   total_cholesterol=total_cholesterol, hdl_cholesterol=hdl, is_hypertensive=hypertensive)
         person = Framingham(gender=isMale, age=age, diabetes=diabetic, smoker=smoker, blood_pressure=blood_pressure,
                             total_cholesterol=total_cholesterol, hdl=hdl, treated_blood_pressure=hypertensive)
-        risk_score = person.FraminghamRisk()
+        risk_score, risk_level  = person.FraminghamRisk()
         RiskScore.objects.create(user_id=user_id, risk_score=risk_score)
         print(risk_score)
         return redirect('dashboard')

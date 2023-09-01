@@ -121,10 +121,3 @@ class Framingham:
         return float(score), risk_level
 
 
-person = Framingham(gender=0, age=20, diabetes=0, smoker=0, blood_pressure=120, total_cholesterol=3.8, hdl=1.21, treated_blood_pressure=0)
-risk_score, risk_level = person.FraminghamRisk()
-print(risk_score)
-print("Risk Level:", risk_level)
-
-
-
