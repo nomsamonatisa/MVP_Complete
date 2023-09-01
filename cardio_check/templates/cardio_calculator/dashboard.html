@@ -1,0 +1,168 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dashboard</title>
+    <!-- Include Bootstrap CSS -->
+    <!-- Bootstrap CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+    <!-- Custom CSS Styles -->
+    <style>
+        /* Custom CSS styles go here */
+    </style>
+</head>
+
+<body>
+    <div class="sidebar mx-2 my-2">
+        <img src="{% static 'images/logo.svg' %}" alt="Logo" class="mb-3">
+        <a href="#">Dashboard</a>
+        <a href="#">Profile</a>
+
+        <!-- Add more menu items as needed -->
+    </div>
+
+    <div class="dashboard-content my-2">
+        <h2 class="mb-4">Cardio Check</h2>
+        <div class="card">
+            <!-- <h5 class="card-title">Cardio Check Application</h5> -->
+            <p class="card-text text-monospace">
+                Welcome to Cardio Check! Our application uses the Framingham Risk Calculator to assess a person's
+                likelihood of getting heart disease. Simply input your health information, and our calculator will
+                provide you with valuable insights about your cardiovascular health. Stay informed and take control of
+                your well-being with Cardio Check.
+            </p>
+            <div class="col-md-12">
+                <a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#inputModal">Take
+                    Test</a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card bg-dark mb-4 h-100">
+                    <div class="card-body">
+                        <h5 class="card-title text-white">Total Cholesterol</h5>
+                        <p class="card-text">
+                            <span style="font-size: 24px;">200</span> <span style="font-size: 12px;">mg/dL</span>
+                            <!-- You can include additional information here -->
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-dark mb-4 h-100">
+                  <div class="card-body">
+                    <h5 class="card-title text-white">HDL Cholesterol</h5>
+                    <p class="card-text">
+                      <span style="font-size: 24px;">200</span> <span style="font-size: 12px;">mg/dL</span>
+                      <!-- You can include additional information here -->
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="card bg-dark mb-4 h-100">
+                  <div class="card-body">
+                    <h5 class="card-title text-white">Systolic BP</h5>
+                    <p class="card-text">
+                      <span style="font-size: 24px;">200</span> <span style="font-size: 12px;">mg/dL</span>
+                      <!-- You can include additional information here -->
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="card bg-dark mb-4 h-100">
+                  <div class="card-body">
+                    <h5 class="card-title text-white">Heart Age</h5>
+                    <p class="card-text">
+                      <span style="font-size: 24px;">200</span>
+                      <!-- You can include additional information here -->
+                    </p>
+                  </div>
+                </div>
+              </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="inputModal" tabindex="-1" aria-labelledby="inputModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-dark">
+                    <h5 class="modal-title text-white" id="inputModalLabel">Calculate Framingham Score</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Form to capture user inputs for Framingham Score calculation -->
+                    <form action="{% url 'calculate_framingham_score' %}" method="post" class="row g-3">
+                        {% csrf_token %}
+                        <div class="col-md-6">
+                            <label for="age" class="form-label">Age</label>
+                            <input type="number" class="form-control" name="age" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="gender" class="form-label">Gender</label>
+                            <select class="form-select" name="gender" required>
+                                <option value="0">Male</option>
+                                <option value="1">Female</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="total_cholesterol" class="form-label">Total Cholesterol (mg/dL)</label>
+                            <input type="number" class="form-control" name="total_cholesterol" step=".01" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="hdl_cholesterol" class="form-label">HDL Cholesterol (mg/dL)</label>
+                            <input type="number" class="form-control" name="hdl_cholesterol" step=".01" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="systolic_blood_pressure" class="form-label">Systolic Blood Pressure
+                                (mmHg)</label>
+                            <input type="number" class="form-control" name="systolic_blood_pressure" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="diabetic" class="form-label">Diabetic?</label>
+                            <select class="form-select" name="diabetic" required>
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="smoker" class="form-label">Smoker?</label>
+                            <select class="form-select" name="smoker" required>
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="hypertensive" class="form-label">Are you taking medication for blood
+                                pressure</label>
+                            <select class="form-select" name="hypertensive" required>
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Calculate</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- Include Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
