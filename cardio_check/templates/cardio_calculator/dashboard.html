@@ -47,7 +47,7 @@
                     <div class="card-body">
                         <h5 class="card-title text-white">Total Cholesterol</h5>
                         <p class="card-text">
-                            <span style="font-size: 24px;">200</span> <span style="font-size: 12px;"></span>
+                            <span style="font-size: 24px;">{{health_data.total_cholesterol}}</span> <span style="font-size: 12px;">mmol/L</span>
                             <!-- You can include additional information here -->
                         </p>
                     </div>
@@ -58,7 +58,7 @@
                   <div class="card-body">
                     <h5 class="card-title text-white">HDL Cholesterol</h5>
                     <p class="card-text">
-                      <span style="font-size: 24px;">200</span> <span style="font-size: 12px;"></span>
+                      <span style="font-size: 24px;">{{health_data.hdl_cholesterol}}</span> <span style="font-size: 12px;">mmol/L</span>
                       <!-- You can include additional information here -->
                     </p>
                   </div>
@@ -70,7 +70,7 @@
                   <div class="card-body">
                     <h5 class="card-title text-white">Systolic BP</h5>
                     <p class="card-text">
-                      <span style="font-size: 24px;">200</span> <span style="font-size: 12px;">mg/dL</span>
+                      <span style="font-size: 24px;">{{health_data.blood_pressure}}</span> <span style="font-size: 12px;">mmHg</span>
                       <!-- You can include additional information here -->
                     </p>
                   </div>
@@ -82,7 +82,7 @@
                   <div class="card-body">
                     <h5 class="card-title text-white">Risk Level</h5>
                     <p class="card-text">
-                      <span style="font-size: 24px;"></span>
+                      <span style="font-size: 24px;">{{risk.risk_level}}</span>
                       <!-- You can include additional information here -->
                     </p>
                   </div>
@@ -115,11 +115,11 @@
                             </select>
                         </div>
                         <div class="col-md-6">
-                            <label for="total_cholesterol" class="form-label">Total Cholesterol (mg/dL)</label>
+                            <label for="total_cholesterol" class="form-label">Total Cholesterol (mmol/L)</label>
                             <input type="number" class="form-control" name="total_cholesterol" step=".01" required>
                         </div>
                         <div class="col-md-6">
-                            <label for="hdl_cholesterol" class="form-label">HDL Cholesterol (mg/dL)</label>
+                            <label for="hdl_cholesterol" class="form-label">HDL Cholesterol (mmol/L)</label>
                             <input type="number" class="form-control" name="hdl_cholesterol" step=".01" required>
                         </div>
                         <div class="col-md-6">

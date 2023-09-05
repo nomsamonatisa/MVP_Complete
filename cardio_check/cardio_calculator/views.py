@@ -6,11 +6,19 @@ from cardio_calculator.models import HealthData, RiskScore
 
 
 def home_view(request):
-    return render(request, 'registration/login.html')
+    return render(request, 'registration/landing.html')
 
 
 def dashboard(request):
-    return render(request, 'cardio_calculator/dashboard.html')
+    user = request.user.id
+    health_data = HealthData.objects.filter(user_id=user).last()
+    risk = RiskScore.objects.filter(user_id=user).last()
+
+    context = {
+        'health_data': health_data,
+        'risk': risk
+    }
+    return render(request, 'cardio_calculator/dashboard.html', context)
 
 
 def calculate_framingham_score(request):
@@ -36,6 +44,5 @@ def calculate_framingham_score(request):
         person = Framingham(gender=isMale, age=age, diabetes=diabetic, smoker=smoker, blood_pressure=blood_pressure,
                             total_cholesterol=total_cholesterol, hdl=hdl, treated_blood_pressure=hypertensive)
         risk_score, risk_level  = person.FraminghamRisk()
-        RiskScore.objects.create(user_id=user_id, risk_score=risk_score)
-        print(risk_score)
+        RiskScore.objects.create(user_id=user_id, risk_score=risk_score, risk_level=risk_level)
         return redirect('dashboard')

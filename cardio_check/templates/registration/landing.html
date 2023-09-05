@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardio-Check - Your Heart Health Companion</title>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+
+    <link href="{% static 'css/landing.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="{% static 'images/logo.svg' %}" alt="Cardio-Check Logo">
+            </div>
+            <ul>
+                <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'register' %}">Register</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Landing Section -->
+    <section class="landing bg-dark">
+        <div class="container">
+            <div class="landing-content">
+                <h1 class="text-white">Welcome to Cardio-Check</h1>
+                <p>Your Heart Health Companion</p>
+                <p>Cardio-Check is a comprehensive health monitoring app designed to help you take control of your
+                    cardiovascular health. Whether you want to track your blood pressure, cholesterol levels, or heart
+                    rate, our app provides you with the tools and insights you need.</p>
+                <p>With Cardio-Check, you can set personalized health goals, receive valuable insights, and make
+                    informed decisions about your well-being. Start your journey to a healthier heart today!</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Rest of your landing page content -->
+
+</body>
+
+</html>
