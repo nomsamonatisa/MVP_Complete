@@ -1,6 +1,7 @@
 class Framingham:
 
     def __init__(self, gender, age, diabetes, smoker, blood_pressure, total_cholesterol, hdl, treated_blood_pressure):
+         # Initialize the Framingham class with various health parameters
         self.gender = gender
         self.age = age
         self.diabetes = diabetes
@@ -11,16 +12,20 @@ class Framingham:
         self.treated_blood_pressure = treated_blood_pressure
 
     def calculate_risk_score(self, age_range, cholesterol_range, hdl_range, blood_pressure_ranges, risk_factors):
+         # Calculate the Framingham risk score based on provided health parameters and risk factor ranges
         risk_score = 0
 
+        # Calculate risk score based on age within specified age ranges
         if age_range:
             for start, end, score in age_range:
                 if start < self.age <= end:
                     risk_score += score
 
+        # Add additional risk based on diabetes and smoking status
         risk_score += self.diabetes * risk_factors['diabetes']
         risk_score += self.smoker * risk_factors['smoker']
 
+        # Adjust risk score based on treated or untreated blood pressure and blood pressure ranges
         if self.treated_blood_pressure == 0:  # BP Treated
             for start, end, score in blood_pressure_ranges:
                 if start < self.blood_pressure <= end:
@@ -31,6 +36,7 @@ class Framingham:
                 if start < self.blood_pressure <= end:
                     risk_score += score
 
+        # Adjust risk score based on total cholesterol and HDL cholesterol levels
         for start, end, score in cholesterol_range:
             if start < self.total_cholesterol <= end:
                 risk_score += score
@@ -42,12 +48,16 @@ class Framingham:
         return risk_score
 
     def calculate_score(self, risk_score, score_mapping):
+        # Map the calculated risk score to a specific risk score category based on predefined score ranges
+
         for lower_bound, upper_bound, score in score_mapping:
             if lower_bound < risk_score <= upper_bound:
                 return score
-        return score_mapping[-1][2]  # Default max score
+        return score_mapping[-1][2]  # Default max score if no range matches
     
     def calculate_risk_level(self, risk_score):
+        # Determine the risk level based on gender-specific risk score mappings
+
         if self.gender == 0:
             risk_level_mapping = {
                 (float('-inf'), 8.6): "Low Risk",
@@ -68,6 +78,8 @@ class Framingham:
     
 
     def FraminghamRisk(self):
+        # Calculate the overall Framingham risk by combining the individual risk factors and mapping to a risk level
+        
         score_mapping_male = [(float('-inf'), -2, 1), (-2, -1, 1.1), (-1, 0, 1.4), (0, 1, 1.6), (1, 2, 1.9),
                               (2, 3, 2.3), (3, 4, 2.8), (4, 5, 3.3), (5, 6, 3.9), (6, 7, 4.7),
                               (7, 8, 5.6), (8, 9, 6.7), (9, 10, 7.9), (10, 11, 9.4), (11, 12, 11.2),
